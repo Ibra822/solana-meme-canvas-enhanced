@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262 100% 64%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 100% 64%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#1A1F2C] text-foreground;
+    font-family: 'Press Start 2P', cursive;
+    background-image: linear-gradient(109.6deg, rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1%);
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.pixel-grid {
+  background: #fff;
+  padding: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(153, 69, 255, 0.1);
+  -webkit-overflow-scrolling: touch;
+  touch-action: none;
+  position: relative;
+  border: 2px solid rgba(153, 69, 255, 0.3);
+  overflow: hidden;
+}
+
+.pixel {
+  width: 1px;
+  height: 1px;
+  background: #f0f0f0;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  image-rendering: pixelated;
+  border-right: 1px solid rgba(153, 69, 255, 0.1);
+  border-bottom: 1px solid rgba(153, 69, 255, 0.1);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pixel:hover {
+  background: rgba(153, 69, 255, 0.2);
+}
+
+.pixel.taken {
+  background: #9945FF;
+  border: none;
+}
+
+.pixel.block-start {
+  position: relative;
+}
+
+.pixel.block-start::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(153, 69, 255, 0.5);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  background: rgba(153, 69, 255, 0.05);
+  box-shadow: 0 0 10px rgba(153, 69, 255, 0.1);
+}
+
+.pixel.block-start:hover::before,
+.pixel.selecting.block-start::before {
+  opacity: 1;
+  background: rgba(153, 69, 255, 0.2);
+  border: 1px solid rgba(153, 69, 255, 0.8);
+  box-shadow: 0 0 15px rgba(153, 69, 255, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (max-width: 768px) {
+  .pixel-grid {
+    touch-action: manipulation;
+  }
+  
+  .pixel {
+    touch-action: manipulation;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.btn-animated {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+/* Wallet Adapter Custom Styles */
+.wallet-adapter-modal {
+  @apply font-pixel;
+}
+
+.wallet-adapter-modal-wrapper {
+  @apply bg-[#1A1F2C] border border-solana-purple/20;
+}
+
+.wallet-adapter-modal-button-close {
+  @apply bg-solana-purple/20 text-white;
+}
+
+.wallet-adapter-modal-title {
+  @apply text-[14px] bg-gradient-to-r from-[#FFD700] to-[#FFA500] bg-clip-text text-transparent;
+}
+
+.wallet-adapter-modal-list {
+  @apply grid grid-cols-2 gap-2;
+}
+
+.wallet-adapter-button {
+  @apply bg-gradient-to-r from-solana-purple to-solana-blue hover:opacity-90 text-white font-pixel text-[8px] h-8 justify-center items-center;
+}
+
+.wallet-adapter-modal-list-more {
+  @apply text-solana-purple hover:text-solana-blue transition-colors;
+}
+
+.wallet-adapter-dropdown-list {
+  @apply bg-[#1A1F2C] border border-solana-purple/20;
+}
+
+.wallet-adapter-dropdown-list-item {
+  @apply text-white hover:bg-solana-purple/20 transition-colors;
+}
